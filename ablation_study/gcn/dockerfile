@@ -1,0 +1,15 @@
+# Base Images 
+## https://tianchi.aliyun.com/forum/postDetail?postId=67720
+FROM registry.cn-shanghai.aliyuncs.com/tcc-public/pytorch:1.11-cuda11.3-py3 
+## install requirement
+RUN pip install torch-scatter torch-sparse torch-cluster torch-spline-conv torch-geometric -f https://data.pyg.org/whl/torch-1.11.0+cu113.html
+RUN pip install pandas
+RUN pip install tqdm
+RUN pip install numpy
+RUN pip install argparse
+# RUN pip install pickle
+ADD . / 
+WORKDIR / 
+## sh run.sh 
+
+CMD ["sh", "run.sh"]
