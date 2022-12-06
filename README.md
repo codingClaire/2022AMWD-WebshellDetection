@@ -18,3 +18,11 @@
 * `configs/gat/split1`和`configs/gat/split2`分别是按照4:1:1和4:1:50划分的数据集进行实验的参数配置文件。
 * 进入`ablation_study/gat`，运行`nohup ./run.sh > run.log 2>&1 &`
 * 运行结果将分别附加输出到`configs/gat/split1/gat_split1_rslt.txt`文件和`configs/gat/split2/gat_split1_rslt.txt`文件中
+
+### Adaptive aggregation with Class-Attentive Diffusion
+`ablation_study/adaCAD`: 使用adaCAD模块进行分类。
+* `configs/adaCAD/split1`和`configs/adaCAD/split2`分别是按照4:1:1和4:1:50划分的数据集进行实验的参数配置文件。
+    * "vary_steps"文件夹下的不同配置文件中仅变化`Kstep_for_AdaCAD`这一参数，取值范围为[0,10]。用于探究不同的Kstep对模型效果的影响
+    * "kstep4_beta0.8_embdim100"文件夹下的不同配置文件中变化`jk`和`pooling`两个参数。用于探究不同`JK`和`pooling`的选择对模型效果的影响。
+* 进入`ablation_study/adaCAD`，运行`nohup ./run.sh > run.log 2>&1 &`
+* 运行结果将分别附加输出到相应配置文件夹下的"...rslt.txt"文件中。
