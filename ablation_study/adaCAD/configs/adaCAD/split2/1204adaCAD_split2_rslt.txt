@@ -1,3 +1,0 @@
-config_jk2_pooling1, Avg.0.9299069166815078 +- 0.84%
-config_jk2_pooling2, Avg.0.9299069166815078 +- 0.84%
-config_jk2_pooling3, Avg.0.9299069166815078 +- 0.84%
