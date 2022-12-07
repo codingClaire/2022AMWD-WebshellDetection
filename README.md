@@ -26,3 +26,9 @@
     * "kstep4_beta0.8_embdim100"文件夹下的不同配置文件中变化`jk`和`pooling`两个参数。用于探究不同`JK`和`pooling`的选择对模型效果的影响。
 * 进入`ablation_study/adaCAD`，运行`nohup ./run.sh > run.log 2>&1 &`
 * 运行结果将分别附加输出到相应配置文件夹下的"...rslt.txt"文件中。
+
+## 画图
+### plot_bar.py
+* 将需要画图的数据放到`rslt_data`文件夹下。
+* 运行`plot_bar.py`或`plot_curve.py`文件画图。注意指定结果数据文件。
+* 注意，读入数据部分代码可能需要根据需要调试一下。
