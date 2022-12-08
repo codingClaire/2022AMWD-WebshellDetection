@@ -76,6 +76,10 @@
     ```python
     python plot_curve.py --datafile gat_split2_vary_layers.txt --readtype gat
     ```
+* cad不同layer结果画图：
+    ```python
+    python plot_curve.py --datafile cad_split2_vary_layers.txt --readtype cad
+    ```
 * gin不同layer结果画图：
     ```python
     python plot_curve.py --datafile gin_split2_vary_layers.txt --readtype gin

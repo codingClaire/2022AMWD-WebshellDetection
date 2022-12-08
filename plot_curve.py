@@ -16,7 +16,7 @@ y_avg = {}
 y_std = {}
 configs = []
 metrics = []
-if args.readtype in ['gat','gin']:
+if args.readtype in ['gat','gin', 'cad']:
     with open(f"rslt_data/{args.datafile}", "r") as fin:
         line_cnt = 0
         for line in fin.readlines():
@@ -102,11 +102,12 @@ legend_fontsize = fontsize -9
 plt.figure(figsize=(21,15), dpi=80)
 std_alpha = 0.1
 
+curves = []
 for i in range(len(metrics)):
-    plt.plot(range(len(x_str)), y_avg[metrics[i]], 
+    curves.append(plt.plot(range(len(x_str)), y_avg[metrics[i]], 
         color=color_list[i], marker=marker_list[i], 
         linestyle=linestyle_list[0], label=labels[i], 
-        markersize=markersize, alpha=alpha, linewidth=linewidth)
+        markersize=markersize, alpha=alpha, linewidth=linewidth))
     if args.with_std:
         r1 = list(map(lambda x: x[0]-x[1], zip(y_avg[metrics[i]], y_std[metrics[i]])))#上方差
         r2 = list(map(lambda x: x[0]+x[1], zip(y_avg[metrics[i]], y_std[metrics[i]])))#下方差
@@ -118,6 +119,13 @@ plt.yticks(fontsize=ticks_fontsize)
 if args.datafile == 'gcn_split2_vary_layers.txt':
     plt.ylim(0.875, 0.985)
     plt.legend(loc='lower left', bbox_to_anchor=(0.1, 0), ncol=1, fontsize=legend_fontsize)
+elif args.datafile == 'cad_split2_vary_layers.txt':
+    plt.legend(loc='upper right', bbox_to_anchor=(1, 0.67), ncol=2, fontsize=legend_fontsize)
+elif args.datafile == 'gin_split2_vary_layers.txt':
+    plt.ylim(0.80, 1.0)
+    a=plt.legend([curves[0], curves[1]],[labels[0], labels[1]], loc="lower left", bbox_to_anchor=(0,0), fontsize=legend_fontsize)
+    plt.legend([curves[2], curves[3]],[labels[2], labels[3]],loc="lower right", bbox_to_anchor=(0,0), fontsize=legend_fontsize)
+    plt.gca().add_artist(a)
 else:
     plt.legend(loc='upper right', bbox_to_anchor=(1, 0.73), ncol=2, fontsize=legend_fontsize)
 plt.tight_layout()
