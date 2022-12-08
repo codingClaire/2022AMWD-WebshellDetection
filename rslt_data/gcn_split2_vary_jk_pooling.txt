@@ -1,0 +1,30 @@
+=======Split: 2 JK: last Pooling:  max =======
+Acc:  0.9809 +/- 0.05 %
+Precision: 0.9577 +/- 0.08 %
+Recall: 0.9454 +/- 0.34 %
+Score: 0.9552 +/- 0.05 %
+=======Split: 2 JK: sum Pooling:  max =======
+Acc:  0.9724 +/- 0.54 %
+Precision: 0.9719 +/- 0.63 %
+Recall: 0.8867 +/- 3.3 %
+Score: 0.9532 +/- 0.48 %
+=======Split: 2 JK: last Pooling:  mean =======
+Acc:  0.9807 +/- 0.07 %
+Precision: 0.9584 +/- 0.97 %
+Recall: 0.9435 +/- 0.66 %
+Score: 0.9553 +/- 0.63 %
+=======Split: 2 JK: sum Pooling:  mean =======
+Acc:  0.9783 +/- 0.26 %
+Precision: 0.9679 +/- 0.57 %
+Recall: 0.9211 +/- 1.92 %
+Score: 0.9581 +/- 0.12 %
+=======Split: 2 JK: last Pooling:  sum =======
+Acc:  0.9662 +/- 0.2 %
+Precision: 0.9354 +/- 1.22 %
+Recall: 0.8911 +/- 1.98 %
+Score: 0.926 +/- 0.64 %
+=======Split: 2 JK: sum Pooling:  sum =======
+Acc:  0.9667 +/- 0.22 %
+Precision: 0.9358 +/- 1.28 %
+Recall: 0.8934 +/- 1.83 %
+Score: 0.9268 +/- 0.74 %

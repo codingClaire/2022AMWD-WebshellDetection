@@ -35,7 +35,12 @@
 
 例如，
 * gat不同jk+pooling组合结果画图：
-```python
-python plot_bar.py --datafile gat_split1_vary_jk_pooling.txt
-python plot_bar.py --datafile gat_split2_vary_jk_pooling.txt
-```
+    ```python
+    python plot_bar.py --datafile gat_split1_vary_jk_pooling.txt --readtype gat
+    python plot_bar.py --datafile gat_split2_vary_jk_pooling.txt--readtype gat
+    ```
+* gcn不同jk+pooling组合结果画图：
+     ```python
+    python plot_bar.py --datafile gcn_split1_vary_jk_pooling.txt --readtype gcn
+    python plot_bar.py --datafile gcn_split2_vary_jk_pooling.txt--readtype gcn
+    ```
