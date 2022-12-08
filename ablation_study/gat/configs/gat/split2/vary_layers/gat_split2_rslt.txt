@@ -1,0 +1,4 @@
+config_layer2_jk2_pooling3,Avg.acc:97.16993492597283+-0.13%, Avg.recall:89.6462975218766+-1.58%, Avg.precision:95.81261958360882+-0.90%, Avg.score:94.50099693663456+-0.35%, 
+config_layer3_jk2_pooling3,Avg.acc:97.24272466553116+-0.19%, Avg.recall:89.66100448562395+-1.56%, Avg.precision:96.17209988035238+-0.88%, Avg.score:94.78505354899876+-0.46%, 
+config_layer4_jk2_pooling3,Avg.acc:97.17575810513749+-0.39%, Avg.recall:88.30796382086919+-2.31%, Avg.precision:97.17783638896806+-0.39%, Avg.score:95.24985276382886+-0.35%, 
+config_layer5_jk2_pooling3,Avg.acc:97.35336506965977+-0.20%, Avg.recall:90.06544598867565+-1.13%, Avg.precision:96.33524832548729+-0.67%, Avg.score:95.00804913679546+-0.48%, 
