@@ -16,7 +16,7 @@ y_avg = {}
 y_std = {}
 configs = []
 metrics = []
-if args.readtype == 'gat':
+if args.readtype in ['gat','gin']:
     with open(f"rslt_data/{args.datafile}", "r") as fin:
         line_cnt = 0
         for line in fin.readlines():
@@ -72,9 +72,14 @@ print("metrics:", metrics)
 #     labels.append(v[layer_idx+len('layer'):layer_idx+len('layer')+1])
 labels = metrics
 x_str = []
-for config in configs:
-    layer_idx = config.index('layer')
-    x_str.append(config[layer_idx+len('layer'):layer_idx+len('layer')+1])
+if args.readtype=='gin':
+    for config in configs:
+        layer_idx = config.index('layer')
+        x_str.append(config[layer_idx+len('layer')+1:layer_idx+len('layer')+2])
+else:
+    for config in configs:
+        layer_idx = config.index('layer')
+        x_str.append(config[layer_idx+len('layer'):layer_idx+len('layer')+1])
 print('x_str:', x_str)
 
 alpha=0.9

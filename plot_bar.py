@@ -5,7 +5,7 @@ import argparse
 parser = argparse.ArgumentParser()
 parser.add_argument('--with_std', type=int, default=1)
 parser.add_argument('--datafile', type=str, required=True, help='rslt data file')
-parser.add_argument('--readtype', type=str, required=True, help='gat, gcn')
+parser.add_argument('--readtype', type=str, required=True, help='gat, gcn,gin')
 parser.add_argument('--outdir', type=str, default='./figures')
 parser.add_argument('--filename', type=str, default='', help='set the name of the output figure, default for similar to input filename')
 parser.add_argument('--filetype', type=str, default='png')
@@ -16,7 +16,7 @@ y_avg = {}
 y_std = {}
 configs = []
 metrics = []
-if args.readtype == 'gat':
+if args.readtype in ['gat','gin']:
     with open(f"rslt_data/{args.datafile}", "r") as fin:
         line_cnt = 0
         for line in fin.readlines():

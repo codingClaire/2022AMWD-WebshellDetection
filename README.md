@@ -54,6 +54,11 @@
     python plot_bar.py --datafile gcn_split1_vary_jk_pooling.txt --readtype gcn
     python plot_bar.py --datafile gcn_split2_vary_jk_pooling.txt--readtype gcn
     ```
+* gin不同jk+pooling组合结果画图：
+     ```python
+    python plot_bar.py --datafile gin_split1_vary_jk_pooling.txt --readtype gin
+    python plot_bar.py --datafile gin_split2_vary_jk_pooling.txt--readtype gin
+    ```
 
 ### plot_curve.py
 
@@ -61,4 +66,8 @@
 * gat不同layer结果画图：
     ```python
     python plot_curve.py --datafile gat_split2_vary_layers.txt --readtype gat
+    ```
+* gin不同layer结果画图：
+    ```python
+    python plot_curve.py --datafile gin_split2_vary_layers.txt --readtype gin
     ```
