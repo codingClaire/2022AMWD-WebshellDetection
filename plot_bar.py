@@ -115,6 +115,8 @@ if args.datafile == 'gcn_split1_vary_jk_pooling.txt':
     plt.ylim(0.91,1.06)
 elif args.datafile == 'cad_split2_vary_jk_pooling.txt':
     plt.ylim(0.76,1.06)
+elif args.datafile == 'gin_split2_vary_jk_pooling.txt':
+    plt.ylim(0.72,1.12)
 else:
     plt.ylim(0.85,1.10)
 figure_title = args.datafile.split('.')[0]
