@@ -32,3 +32,10 @@
 * 将需要画图的数据放到`rslt_data`文件夹下。
 * 运行`plot_bar.py`或`plot_curve.py`文件画图。注意指定结果数据文件。
 * 注意，读入数据部分代码可能需要根据需要调试一下。
+
+例如，
+* gat不同jk+pooling组合结果画图：
+```python
+python plot_bar.py --datafile gat_split1_vary_jk_pooling.txt
+python plot_bar.py --datafile gat_split2_vary_jk_pooling.txt
+```
