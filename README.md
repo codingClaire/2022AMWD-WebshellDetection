@@ -26,3 +26,14 @@
     * "kstep4_beta0.8_embdim100"文件夹下的不同配置文件中变化`jk`和`pooling`两个参数。用于探究不同`JK`和`pooling`的选择对模型效果的影响。
 * 进入`ablation_study/adaCAD`，运行`nohup ./run.sh > run.log 2>&1 &`
 * 运行结果将分别附加输出到相应配置文件夹下的"...rslt.txt"文件中。
+
+### Graph Isomorphism Network
+`ablation_study/gin`: 使用GIN模块进行分类。
+* `configs/gin/split1`和`configs/gin/split2`分别是按照4:1:1和4:1:50划分的数据集进行实验的参数配置文件。
+* 进入`ablation_study/gin`，
+    - 运行`nohup sh run1.sh > GinAblitionJK_Pool.log 2>&1 &` 对JK和Pooling参数进行消融实验
+        * 运行结果将分别附加输出到`configs/gin/split1/gin_split1rslt.txt`文件和`configs/gin/split2/rslt.txt`文件中
+    - 运行`nohup sh run2.sh > GinAblitionLayers.log 2>&1 &` 对Layer参数进行在split2最后的JK:max和pooling:sum的层数进行消融实验
+        * 运行结果将附加输出到`configs/gin/split2/gin_split2_rslt.txt`文件中
+        
+

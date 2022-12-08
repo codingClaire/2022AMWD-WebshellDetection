@@ -1,0 +1,6 @@
+config_jk1_pooling1,Avg.acc:98.840717802128 +- 0.05%, Avg.recall:96.52375434530707 +- 0.41%, Avg.precision:97.809590717528 +- 0.23%, Avg.score:97.54904584896477 +- 0.12% 
+config_jk1_pooling2,Avg.acc:98.00698745434334 +- 0.41%, Avg.recall:93.70413286983391 +- 2.04%, Avg.precision:94.68687452331525 +- 2.66%, Avg.score:95.92164495230762 +- 0.58% 
+config_jk1_pooling3,Avg.acc:99.1106876290297 +- 0.06%, Avg.recall:97.29625337968327 +- 0.57%, Avg.precision:98.36363694824053 +- 0.40%, Avg.score:98.14685028679399 +- 0.23% 
+config_jk2_pooling1,Avg.acc:98.65809115451802+-0.11%, Avg.recall:95.75125531093086 +- 0.54%, Avg.precision:97.67553564466679 +- 0.11%, Avg.score:97.2839720407631 + -0.13%, 
+config_jk2_pooling2,Avg.acc:97.85612196283945+-0.25%, Avg.recall:91.96601004248744 +- 1.70%, Avg.precision:97.47304749390154 +- 0.50%, Avg.score:96.31084016656576 +- 0.17%, 
+config_jk2_pooling3,Avg.acc:99.25361283150705+-0.03%, Avg.recall:97.52800308999614 +- 0.20%, Avg.precision:98.82753903355277 +- 0.32%, Avg.score:98.56442775356746 +- 0.22% 

@@ -1,0 +1,22 @@
+{
+    "extract": true,
+    "eval": true,
+    "batch_size": 32,
+    "load": 0,
+    "epochs": 50,
+    "gnn_type": "gin",
+    "num_layer": 3,
+    "edge_dim": 1,
+    "emb_dim": 300,
+    "drop_ratio": 0.5,
+    "virtual_node": "False",
+    "residual": "False",
+    "JK": "sum",
+    "learning_rate": 0.001,
+    "device": 0,
+    "save_every_epoch": 10,
+    "model_path": "model/",
+    "continues_fials":5,
+    "last_pooling":"max"
+
+}
