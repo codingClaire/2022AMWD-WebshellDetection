@@ -1,0 +1,6 @@
+JK:last+Pooling:mean,Avg.acc:98.4913450849611+-0.09%, Avg.recall:95.40363074546157+-0.63%, Avg.precision:97.20751971036775+-0.22%, Avg.score:96.84015992277737+-0.10%, 
+JK:last+Pooling:add,Avg.acc:98.4913450849611+-0.09%, Avg.recall:95.40363074546157+-0.63%, Avg.precision:97.20751971036775+-0.22%, Avg.score:96.84015992277737+-0.10%, 
+JK:last+Pooling:max,Avg.acc:98.4913450849611+-0.09%, Avg.recall:95.40363074546157+-0.63%, Avg.precision:97.20751971036775+-0.22%, Avg.score:96.84015992277737+-0.10%, 
+JK:sum+Pooling:mean,Avg.acc:98.67397173257108+-0.06%, Avg.recall:96.52375434530707+-0.00%, Avg.precision:97.01168735228843+-0.28%, Avg.score:96.91357551107484+-0.22%, 
+JK:sum+Pooling:add,Avg.acc:98.67397173257108+-0.06%, Avg.recall:96.52375434530707+-0.00%, Avg.precision:97.01168735228843+-0.28%, Avg.score:96.91357551107484+-0.22%, 
+JK:sum+Pooling:max,Avg.acc:98.67397173257108+-0.06%, Avg.recall:96.52375434530707+-0.00%, Avg.precision:97.01168735228843+-0.28%, Avg.score:96.91357551107484+-0.22%, 

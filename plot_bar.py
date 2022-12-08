@@ -5,7 +5,7 @@ import argparse
 parser = argparse.ArgumentParser()
 parser.add_argument('--with_std', type=int, default=1)
 parser.add_argument('--datafile', type=str, required=True, help='rslt data file')
-parser.add_argument('--readtype', type=str, required=True, help='gat, gcn,gin')
+parser.add_argument('--readtype', type=str, required=True, help='gat, gcn,gin,cad')
 parser.add_argument('--outdir', type=str, default='./figures')
 parser.add_argument('--filename', type=str, default='', help='set the name of the output figure, default for similar to input filename')
 parser.add_argument('--filetype', type=str, default='png')
@@ -16,7 +16,7 @@ y_avg = {}
 y_std = {}
 configs = []
 metrics = []
-if args.readtype in ['gat','gin']:
+if args.readtype in ['gat','gin','cad']:
     with open(f"rslt_data/{args.datafile}", "r") as fin:
         line_cnt = 0
         for line in fin.readlines():
@@ -108,14 +108,14 @@ else:
     bar5 = plt.bar(x_locs+1.5*width, y_avg[configs[4]], width=width, alpha=alpha, color=color_dict['purple'], label=labels[4])
     bar6 = plt.bar(x_locs+2.5*width, y_avg[configs[5]], width=width, alpha=alpha, color=color_dict['brown'], label=labels[5])
 
-plt.xticks(x_locs, labels=xs_str, fontsize=ticks_fontsize, rotation=45)
+plt.xticks(x_locs, labels=xs_str, fontsize=ticks_fontsize, rotation=0)
 plt.yticks(fontsize=ticks_fontsize)
 # plt.ylim(90,100)
 plt.ylim(0.85,1.10)
 if args.datafile == 'gcn_split1_vary_jk_pooling.txt':
     plt.ylim(0.91,1.06)
 figure_title = args.datafile.split('.')[0]
-plt.title(f'{figure_title}', fontsize=fontsize)
+# plt.title(f'{figure_title}', fontsize=fontsize)
 plt.xlabel(f'metrics', fontsize=fontsize)
 plt.ylabel(f'result', fontsize=fontsize)
 a=plt.legend([bar1, bar2, bar3],[labels[0], labels[1], labels[2]], loc="upper right", bbox_to_anchor=(1.02,1.03), fontsize=legend_fontsize)

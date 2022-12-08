@@ -47,17 +47,22 @@
 * gat不同jk+pooling组合结果画图：
     ```python
     python plot_bar.py --datafile gat_split1_vary_jk_pooling.txt --readtype gat
-    python plot_bar.py --datafile gat_split2_vary_jk_pooling.txt--readtype gat
+    python plot_bar.py --datafile gat_split2_vary_jk_pooling.txt --readtype gat
     ```
 * gcn不同jk+pooling组合结果画图：
      ```python
     python plot_bar.py --datafile gcn_split1_vary_jk_pooling.txt --readtype gcn
-    python plot_bar.py --datafile gcn_split2_vary_jk_pooling.txt--readtype gcn
+    python plot_bar.py --datafile gcn_split2_vary_jk_pooling.txt --readtype gcn
     ```
 * gin不同jk+pooling组合结果画图：
      ```python
     python plot_bar.py --datafile gin_split1_vary_jk_pooling.txt --readtype gin
-    python plot_bar.py --datafile gin_split2_vary_jk_pooling.txt--readtype gin
+    python plot_bar.py --datafile gin_split2_vary_jk_pooling.txt --readtype gin
+    ```
+* cad不同jk+pooling组合结果画图：
+    ```python
+    python plot_bar.py --datafile cad_split1_vary_jk_pooling.txt --readtype cad
+    python plot_bar.py --datafile cad_split2_vary_jk_pooling.txt --readtype cad
     ```
 
 ### plot_curve.py

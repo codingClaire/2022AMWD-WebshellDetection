@@ -9,7 +9,7 @@
     "num_layer": 3,
     "seed":[1,2,3],
     "edge_dim": 1,
-    "emb_dim": 200,
+    "emb_dim": 100,
     "drop_ratio": 0.5,
     "virtual_node": "False",
     "residual": "False",
