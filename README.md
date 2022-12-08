@@ -63,6 +63,10 @@
 ### plot_curve.py
 
 例如，
+* gcn不同layer结果画图：
+    ```python
+    python plot_curve.py --datafile gcn_split2_vary_layers.txt --readtype gcn
+    ```
 * gat不同layer结果画图：
     ```python
     python plot_curve.py --datafile gat_split2_vary_layers.txt --readtype gat

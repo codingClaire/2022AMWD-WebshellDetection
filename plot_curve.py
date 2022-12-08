@@ -45,9 +45,11 @@ elif args.readtype == 'gcn':
                 line = line.strip('=')
                 jk_idx = line.index('JK:')
                 pooling_idx = line.index('Pooling:')
+                layer_idx = line.index('layer:')
                 jk = line[jk_idx+3:pooling_idx].strip(' ')
-                pooling = line[pooling_idx+len('Pooling:'):].strip(' ')
-                config = 'JK:'+jk+'+Pooling:'+pooling
+                pooling = line[pooling_idx+len('Pooling:'):layer_idx].strip(' ')
+                layer=line[layer_idx+len('layer:'):].strip(' ')
+                config = 'JK:'+jk+'+Pooling:'+pooling+'+layer'+layer
                 configs.append(config)
                 variant_cnt += 1
             else:
@@ -113,8 +115,11 @@ plt.xlabel('layers', fontsize=fontsize, labelpad=-2)
 plt.ylabel('Accuracy', fontsize=fontsize)
 plt.xticks(range(len(x_str)), x_str, fontsize=ticks_fontsize, rotation=0)
 plt.yticks(fontsize=ticks_fontsize)
-# plt.legend(loc='upper right', bbox_to_anchor=(1, 2), ncol=2, fontsize=legend_fontsize)
-plt.legend(loc='upper right', bbox_to_anchor=(1, 0.73), ncol=2, fontsize=legend_fontsize)
+if args.datafile == 'gcn_split2_vary_layers.txt':
+    plt.ylim(0.875, 0.985)
+    plt.legend(loc='lower left', bbox_to_anchor=(0.1, 0), ncol=1, fontsize=legend_fontsize)
+else:
+    plt.legend(loc='upper right', bbox_to_anchor=(1, 0.73), ncol=2, fontsize=legend_fontsize)
 plt.tight_layout()
 import os
 if not os.path.exists(args.outdir):
