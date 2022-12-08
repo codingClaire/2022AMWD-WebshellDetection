@@ -1,25 +1,25 @@
 =======Split: 2 JK: sum Pooling:  mean layer:  1.0=======
 Acc:  0.9781 +/- 0.0 %
-Precision: 0.959 +/- 0.42 %
 Recall: 0.929 +/- 0.43 %
+Precision: 0.959 +/- 0.42 %
 Score: 0.9528 +/- 0.24 %
 =======Split: 2 JK: sum Pooling:  mean layer:  2.0=======
 Acc:  0.9781 +/- 0.09 %
-Precision: 0.9559 +/- 0.31 %
 Recall: 0.9325 +/- 0.47 %
+Precision: 0.9559 +/- 0.31 %
 Score: 0.9511 +/- 0.24 %
 =======Split: 2 JK: sum Pooling:  mean layer:  3.0=======
 Acc:  0.9793 +/- 0.02 %
-Precision: 0.9528 +/- 0.1 %
 Recall: 0.9419 +/- 0.03 %
+Precision: 0.9528 +/- 0.1 %
 Score: 0.9506 +/- 0.08 %
 =======Split: 2 JK: sum Pooling:  mean layer:  4.0=======
 Acc:  0.9742 +/- 0.14 %
-Precision: 0.9661 +/- 0.56 %
 Recall: 0.9015 +/- 0.19 %
+Precision: 0.9661 +/- 0.56 %
 Score: 0.9524 +/- 0.48 %
 =======Split: 2 JK: sum Pooling:  mean layer:  5.0=======
 Acc:  0.9779 +/- 0.04 %
-Precision: 0.9558 +/- 0.64 %
 Recall: 0.9317 +/- 0.58 %
+Precision: 0.9558 +/- 0.64 %
 Score: 0.9509 +/- 0.39 %
