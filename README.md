@@ -44,3 +44,11 @@
     python plot_bar.py --datafile gcn_split1_vary_jk_pooling.txt --readtype gcn
     python plot_bar.py --datafile gcn_split2_vary_jk_pooling.txt--readtype gcn
     ```
+
+### plot_curve.py
+
+例如，
+* gat不同layer结果画图：
+    ```python
+    python plot_curve.py --datafile gat_split2_vary_layers.txt --readtype gat
+    ```
