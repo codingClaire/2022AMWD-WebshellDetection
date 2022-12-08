@@ -37,3 +37,28 @@
         * 运行结果将附加输出到`configs/gin/split2/gin_split2_rslt.txt`文件中
         
 
+## 画图
+### plot_bar.py
+* 将需要画图的数据放到`rslt_data`文件夹下。
+* 运行`plot_bar.py`或`plot_curve.py`文件画图。注意指定结果数据文件。
+* 注意，读入数据部分代码可能需要根据需要调试一下。
+
+例如，
+* gat不同jk+pooling组合结果画图：
+    ```python
+    python plot_bar.py --datafile gat_split1_vary_jk_pooling.txt --readtype gat
+    python plot_bar.py --datafile gat_split2_vary_jk_pooling.txt--readtype gat
+    ```
+* gcn不同jk+pooling组合结果画图：
+     ```python
+    python plot_bar.py --datafile gcn_split1_vary_jk_pooling.txt --readtype gcn
+    python plot_bar.py --datafile gcn_split2_vary_jk_pooling.txt--readtype gcn
+    ```
+
+### plot_curve.py
+
+例如，
+* gat不同layer结果画图：
+    ```python
+    python plot_curve.py --datafile gat_split2_vary_layers.txt --readtype gat
+    ```
