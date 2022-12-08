@@ -111,9 +111,12 @@ else:
 plt.xticks(x_locs, labels=xs_str, fontsize=ticks_fontsize, rotation=0)
 plt.yticks(fontsize=ticks_fontsize)
 # plt.ylim(90,100)
-plt.ylim(0.85,1.10)
 if args.datafile == 'gcn_split1_vary_jk_pooling.txt':
     plt.ylim(0.91,1.06)
+elif args.datafile == 'cad_split2_vary_jk_pooling.txt':
+    plt.ylim(0.76,1.06)
+else:
+    plt.ylim(0.85,1.10)
 figure_title = args.datafile.split('.')[0]
 # plt.title(f'{figure_title}', fontsize=fontsize)
 plt.xlabel(f'metrics', fontsize=fontsize)
