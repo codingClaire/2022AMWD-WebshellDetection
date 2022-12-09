@@ -1,11 +1,47 @@
 # 2022AMWD-WebshellDetection
 
+
+## 整体框架
+
+![](figures/framework.png)
+
 ## 提交方案
 
+`submit_version/`路径下是我们比赛时提交的镜像版本，因为有线上数据，所以无法直接运行。
+
+其中config.json是我们的参数设置，对应含义及取值如下：
+```json
+"extract": true, //是否提取字典和图结构数据
+"eval": true, // 是否对训练集和验证集进行验证
+"batch_size": 32, //批处理大小
+"load": 0, // 用于读取已保存的模型，为0即从头开始训练
+"epochs": 50, // 迭代次数
+"gnn_type": "gin", // 使用图神经网络模型的类型
+"num_layer": 3, // 网络层数
+"edge_dim": 1, // 边的维度
+"emb_dim": 300, // 编码特征的大小
+"drop_ratio": 0.5, //dropout的比例
+"virtual_node": "False", // 是否使用虚拟节点
+"residual": "False", // 是否使用残差
+"JK": "sum", // 特征融合方式，可取"sum"或"last"
+"learning_rate": 0.001, // 学习率
+"device": 0, //设备，没有gpu则使用cpu
+"save_every_epoch": 10, //保存模型的频率
+"model_path": "model/", //模型保存位置
+"continues_fials":5, //早停机制的patience
+"last_pooling":"max" // 图读出层的方式，可取"max"，"sum"或"mean"
+```
 
 ## 消融实验
 `ablation_study/`路径下是报告中的消融实验的源码。
+
 数据是官方给定的train.zip和train.csv, 如在本地运行，需要将zip文件解压后放入对应目录下的tctrain/train/，csv文件放入tctrain即可（和比赛提供的路径一致）。
+
+### MLP
+`ablation_study/mlp`: 使用MLP编码节点特征进行分类。
+* mlp_split1.json和mlp_split2.json分别是按照4:1:1和4:1:50划分的数据集进行实验的参数。
+* 进入模块， 运行`python main.py --config "mlp_split1.json" `即可，也可以自定义参数设置的json文件。
+* statistic3.py用于统计最后的实验结果。
 
 ### Graph Convolution Network
 `ablation_study/gcn`: 使用GCN模块进行分类。
