@@ -66,6 +66,7 @@ def save_csv_with_configname(params,file_dir,configname):
         writer.writerow(sheet_title)
     writer.writerow(sheet_data)
     csv_fp.close()
+    
 def bestGPU(gpu_verbose=False, **w):
     import GPUtil
     import numpy as np

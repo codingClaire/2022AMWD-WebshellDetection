@@ -23,7 +23,7 @@ class ASTDataset(geometricDataset):
         if self.task == "val":
             act_index = self.train_num + index
             dic = torch.load(self.data_path + str(act_index) + ".pt")
-            label_df = pd.read_csv("tctrain/train.csv")
+            label_df = pd.read_csv("/home/jliao/webshell/tctrain/train.csv")
             y = 0 if label_df["label"][act_index] == "white" else 1
             return Data(num_nodes=dic["node_type"].shape[0], 
                         node_type= dic["node_type"], 
@@ -33,7 +33,7 @@ class ASTDataset(geometricDataset):
                         y = y)
         elif self.task == "train":
             dic = torch.load(self.data_path + str(index) + ".pt")
-            label_df = pd.read_csv("tctrain/train.csv")
+            label_df = pd.read_csv("/home/jliao/webshell/tctrain/train.csv")
             y = 0 if label_df["label"][index] == "white" else 1
             return Data(num_nodes=dic["node_type"].shape[0], 
                         node_type= dic["node_type"], 
@@ -44,7 +44,7 @@ class ASTDataset(geometricDataset):
         elif self.task == "test_local":
             act_index = self.train_num + self.val_num + index
             dic = torch.load(self.data_path + str(act_index) + ".pt")
-            label_df = pd.read_csv("tctrain/train.csv")
+            label_df = pd.read_csv("/home/jliao/webshell/tctrain/train.csv")
             y = 0 if label_df["label"][act_index] == "white" else 1
             return Data(num_nodes=dic["node_type"].shape[0], 
                         node_type= dic["node_type"], 

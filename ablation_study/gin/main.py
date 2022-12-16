@@ -16,6 +16,7 @@ from dataloader import get_load_dataset
 from model import predictModel
 from utils import load_pickle,setup_seed,save_csv_with_configname,bestGPU
 import copy
+import time
 
 bcls_criterion = torch.nn.BCEWithLogitsLoss()
 
@@ -57,8 +58,8 @@ def eval(model,device,loader):
     recall = (TP) / (TP + FN)
     precision = TP / (TP+FP)
     score = (1+0.5*0.5) *(precision * recall)/((0.5*0.5*precision) + recall)
-    print("acc:", acc, "recall:", recall, "precision:", precision)
-    print("score:", score)
+    # print("acc:", acc, "recall:", recall, "precision:", precision)
+    # print("score:", score)
     result = {
         "acc" : acc,
         "recall": recall,
@@ -81,7 +82,16 @@ def eval_test(model,device,loader):
             ).to(device)
         )
     return list(chain(*y_pred))
-    
+
+def eval_per_sample(model, device, loader, net_parameters):
+    model.eval()
+    model_state_dict, _ = load_best_epoch(net_parameters["model_path"])
+    model.load_state_dict(model_state_dict)
+    model = model.to(device)
+    batch = next(iter(loader)).to(device)
+    with torch.no_grad():
+        pred = model(batch.node_type,batch.node_value,batch.edge_index,batch.edge_attr,batch.batch)
+
 
 def main(net_parameters):
     setup_seed(net_parameters["seed"], torch.cuda.is_available())
@@ -89,12 +99,12 @@ def main(net_parameters):
     if not os.path.exists(net_parameters["model_path"]):
         os.makedirs(net_parameters["model_path"])
     
-    total= pd.read_csv('tctrain/train.csv')
+    total= pd.read_csv('/home/jliao/webshell/tctrain/train.csv')
     total_num  = total.shape[0]
     
     vocab_dir = "vocab/"
     
-    train_dir = 'tctrain/train/'
+    train_dir = '/home/jliao/webshell/tctrain/train/'
     train_dataset_dir = f"split{net_parameters['split_type']}/train_dataset/"
     val_dataset_dir = f"split{net_parameters['split_type']}/val_dataset/"
     test_dataset_dir = f"split{net_parameters['split_type']}/test_dataset/"
@@ -119,11 +129,18 @@ def main(net_parameters):
         value_word2id = load_pickle(vocab_dir + "word2id.node_values.pkl")
         extract_and_save_graph_data( 1,train_num+1, train_dir,train_dataset_dir,type_word2id,value_word2id)
         extract_and_save_graph_data(train_num+1,train_num+val_num+ 1, train_dir,val_dataset_dir,type_word2id,value_word2id)
+        torch.cuda.synchronize()
+        extract_start = time.time()
         extract_and_save_graph_data(train_num+val_num+ 1,total_num+1, train_dir,test_dataset_dir,type_word2id,value_word2id)
+        torch.cuda.synchronize()
+        extract_end= time.time()
+        extract_time = (extract_end-extract_start)/(total_num-train_num-val_num)
+        print(f"extract per test sample time: {extract_time} sec")
     else: 
         type_word2id  = load_pickle(vocab_dir + "word2id.node_types.pkl")
         value_word2id = load_pickle(vocab_dir + "word2id.node_values.pkl")
-        
+        extract_time = 0
+
     net_parameters["type_nums"] = len(type_word2id)
     net_parameters["value_nums"] = len(value_word2id)
 
@@ -134,6 +151,7 @@ def main(net_parameters):
     train_loader = DataLoader(load_train_dataset(), batch_size = net_parameters["batch_size"], shuffle = True)
     val_loader = DataLoader(load_val_dataset(), batch_size = net_parameters["batch_size"], shuffle = True)
     test_local_loader = DataLoader(load_test_local_dataset(), batch_size = net_parameters["batch_size"], shuffle = True)
+    test_per_local_loader = DataLoader(load_test_local_dataset(), batch_size = 1, shuffle = True)
 
     model = predictModel(net_parameters).to(device)
     
@@ -152,6 +170,8 @@ def main(net_parameters):
     loss_list = []
     best_valid_acc = 0
     continues_fials = net_parameters["continues_fials"]
+    torch.cuda.synchronize()
+    train_start = time.time()
     for epoch in range(net_parameters["load"] + 1, net_parameters["epochs"] + 1):
         print("=====Epoch {} ====".format(epoch))
         print("Training...")
@@ -198,14 +218,32 @@ def main(net_parameters):
                 print(f"The perfo rmance of the model has not been improved by consecutive {net_parameters['continues_fials']} epoch, early stop")
                 break
         torch.cuda.empty_cache()
+    torch.cuda.synchronize()
+    train_end = time.time()
+    train_time = train_end-train_start
+    print(f"total training time: {train_time} sec")
     ##### test local #####
+    torch.cuda.synchronize()
+    test_start = time.time()
     model.eval()
     model_state_dict, _ = load_best_epoch(net_parameters["model_path"])
     model.load_state_dict(model_state_dict)
     model = model.to(device)
-    print("test local result:")
     score, result = eval(model,device,test_local_loader)
-    return score, result
+    torch.cuda.synchronize()
+    test_end = time.time()
+    test_time = test_end - test_start
+    print(f"total testing time: {test_time} sec")
+    print("test local result:")
+    print(result)
+    torch.cuda.synchronize()
+    per_test_start = time.time()
+    eval_per_sample(model, device, test_per_local_loader, net_parameters)
+    torch.cuda.synchronize()
+    per_test_end = time.time()
+    per_test_time = per_test_end - per_test_start
+    print(f"per test sample testing time: {per_test_time} sec")
+    return score, result, train_time, test_time, per_test_time, extract_time
 
 
     """
@@ -285,11 +323,26 @@ if __name__ == "__main__":
             net_parameters["model_path"] = (
                 net_parameters["model_path"] + "/" + str(net_parameters["seed"])
             )
-            score, result = main(net_parameters)
-            for k in result.keys():
-                if k not in results_list:
-                    results_list[k] = []
-                results_list[k].append(result[k]*100)
+            score, result, train_time, test_time, per_test_time, extract_time = main(net_parameters)
+            # for k in result.keys():
+            #     if k not in results_list.keys():
+            #         results_list[k] = []
+            #     results_list[k].append(result[k]*100)
+            if 'score' not in results_list.keys():
+                results_list['score'] = []
+            results_list['score'].append(score)
+            if 'train_time' not in results_list.keys():
+                results_list['train_time'] = []
+            results_list['train_time'].append(train_time)
+            if 'test_time' not in results_list.keys():
+                results_list['test_time'] = []
+            results_list['test_time'].append(test_time)
+            if 'per_test_time' not in results_list.keys():
+                results_list['per_test_time'] = []
+            results_list['per_test_time'].append(per_test_time)
+            if 'extract_time' not in results_list.keys():
+                results_list['extract_time'] = []
+            results_list['extract_time'].append(extract_time)
             net_parameters.update(result)
             save_csv_with_configname(net_parameters, "result", config_name)
         # print(f"Avg. {np.mean(np.array(score_list))} +- {np.std(np.array(score_list))*100:.2f}%")
@@ -309,7 +362,7 @@ if __name__ == "__main__":
         net_parameters["model_path"] = (
             net_parameters["model_path"] + "/" + str(net_parameters["seed"])
         )
-        score, result = main(net_parameters)
+        score, result, train_time, test_time, extract_time = main(net_parameters)
             # score_list.append(score)
         net_parameters.update(result)
         save_csv_with_configname(net_parameters, "result", config_name)
