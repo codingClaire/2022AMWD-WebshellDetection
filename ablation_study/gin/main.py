@@ -172,6 +172,7 @@ def main(net_parameters):
     continues_fials = net_parameters["continues_fials"]
     torch.cuda.synchronize()
     train_start = time.time()
+    stop_epoch =  net_parameters["epochs"]
     for epoch in range(net_parameters["load"] + 1, net_parameters["epochs"] + 1):
         print("=====Epoch {} ====".format(epoch))
         print("Training...")
@@ -211,12 +212,14 @@ def main(net_parameters):
                     (model.state_dict(), optimizer.state_dict()),
                     os.path.join(net_parameters["model_path"], "best_validation.pth"),
                 )
-            continues_fials=net_parameters["continues_fials"]
-        else:
-            continues_fials=continues_fials-1
-            if continues_fials==0:
-                print(f"The perfo rmance of the model has not been improved by consecutive {net_parameters['continues_fials']} epoch, early stop")
-                break
+                print(f"best epoch : {epoch}")
+                continues_fials=net_parameters["continues_fials"]
+            else:
+                continues_fials=continues_fials-1
+                if continues_fials==0:
+                    print(f"The perfo rmance of the model has not been improved by consecutive {net_parameters['continues_fials']} epoch, early stop")
+                    stop_epoch = epoch
+                    break
         torch.cuda.empty_cache()
     torch.cuda.synchronize()
     train_end = time.time()
@@ -243,7 +246,7 @@ def main(net_parameters):
     per_test_end = time.time()
     per_test_time = per_test_end - per_test_start
     print(f"per test sample testing time: {per_test_time} sec")
-    return score, result, train_time, test_time, per_test_time, extract_time
+    return score, result, train_time, test_time, per_test_time, extract_time, stop_epoch
 
 
     """
@@ -323,7 +326,7 @@ if __name__ == "__main__":
             net_parameters["model_path"] = (
                 net_parameters["model_path"] + "/" + str(net_parameters["seed"])
             )
-            score, result, train_time, test_time, per_test_time, extract_time = main(net_parameters)
+            score, result, train_time, test_time, per_test_time, extract_time, stop_epoch = main(net_parameters)
             # for k in result.keys():
             #     if k not in results_list.keys():
             #         results_list[k] = []
@@ -343,6 +346,9 @@ if __name__ == "__main__":
             if 'extract_time' not in results_list.keys():
                 results_list['extract_time'] = []
             results_list['extract_time'].append(extract_time)
+            if 'stop_epoch' not in results_list.keys():
+                results_list['stop_epoch'] = []
+            results_list['stop_epoch'].append(stop_epoch)
             net_parameters.update(result)
             save_csv_with_configname(net_parameters, "result", config_name)
         # print(f"Avg. {np.mean(np.array(score_list))} +- {np.std(np.array(score_list))*100:.2f}%")
@@ -362,7 +368,7 @@ if __name__ == "__main__":
         net_parameters["model_path"] = (
             net_parameters["model_path"] + "/" + str(net_parameters["seed"])
         )
-        score, result, train_time, test_time, extract_time = main(net_parameters)
+        score, result, train_time, test_time, extract_time, stop_epoch = main(net_parameters)
             # score_list.append(score)
         net_parameters.update(result)
         save_csv_with_configname(net_parameters, "result", config_name)

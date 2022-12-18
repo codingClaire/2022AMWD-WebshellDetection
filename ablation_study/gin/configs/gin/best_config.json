@@ -1,7 +1,7 @@
 {
     "extract": true,
     "eval": true,
-    "batch_size": 64,
+    "batch_size": 16,
     "load": 0,
     "epochs": 50,
     "gnn_type": "gin",
